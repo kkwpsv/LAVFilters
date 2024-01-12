@@ -70,7 +70,6 @@ configure() (
     --disable-postproc              \
     --disable-encoders              \
     --disable-devices               \
-    --disable-programs              \
     --disable-debug                 \
     --disable-doc                   \
     --enable-avisynth               \
@@ -87,10 +86,13 @@ configure() (
     --enable-zlib                   \
     --build-suffix=-lav             \
     --disable-stripping             \
+    --disable-decoder=ac3           \
+    --disable-decoder=ac3_fixed     \
+    --disable-decoder=truehd        \
     --arch=${arch}"
 
   EXTRA_CFLAGS="-fno-tree-vectorize -D_WIN32_WINNT=0x0600 -DWINVER=0x0600 -gdwarf-5"
-  EXTRA_LDFLAGS=""
+  EXTRA_LDFLAGS="-static -static-libgcc -static-libstdc++"
   PKG_CONFIG_PREFIX_DIR=""
   if [ "${arch}" == "x86_64" ]; then
     export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:../thirdparty/64/lib/pkgconfig/"
